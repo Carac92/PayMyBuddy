@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Entity of User implements UserDetails for Spring Security
+ * Entity of User implements CustomUserDetails for Spring Security
  */
 @Entity
 @Table(name = "Users")
