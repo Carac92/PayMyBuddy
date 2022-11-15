@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,17 +24,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/","index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/register", "/saveUser").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
+                    .loginPage("/login").permitAll()
                 .and()
                 .rememberMe()
                     .rememberMeParameter("remember-Me")
                     .key("somethingSecure")
                     .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
                 .and()
-                .csrf().disable();
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) // https://docs.spring.io/spring-security/site/docs/4.2.12.RELEASE/apidocs/org/springframework/security/config/annotation/web/configurers/LogoutConfigurer.html
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID","remember-Me")
+                    .logoutSuccessUrl("/login");
     }
 }

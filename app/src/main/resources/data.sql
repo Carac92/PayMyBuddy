@@ -1,3 +1,4 @@
+DROP DATABASE PayMyBuddy;
 CREATE DATABASE PayMyBuddy;
 USE PayMyBuddy;
 
@@ -22,7 +23,12 @@ FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
 INSERT INTO Users (email, password, first_name, last_name, address, birthdate, credit)
-VALUES ('dev@mail.com', '$2y$10$jF9xM.R1Ocw7qKLdzX4zBuynuthr1vIjttQ22Yi0M8nMDV.0C72vO', 'dev', 'dev', 'test', DATE '1994-07-03', 0.00);
+VALUES ('jean.dupont@mail.com', '$2y$10$T/uZH/QTbLuTOSl3HMBztub35KMC1Uyxqj.eOs3Zjtm6/CrvK.fwi', 'Jean', 'Dupont',
+ '1234 avenue', DATE '1989-07-03', 1000);
+
+INSERT INTO Users (email, password, first_name, last_name, address, birthdate, credit)
+VALUES ('marie.dupont@mail.com', '$2y$10$T/uZH/QTbLuTOSl3HMBztub35KMC1Uyxqj.eOs3Zjtm6/CrvK.fwi', 'Marie', 'Dupont',
+ '1234 avenue', DATE '1988-05-02', 1000);
 
 CREATE TABLE Credit_Card_Info (
 credit_card_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,

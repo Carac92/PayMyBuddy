@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Creative Colorlib SignUp Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="templates/css/register.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
+</head>
+<body>
+<!-- main -->
+<div class="main-w3layouts wrapper">
+    <h1>PayMyBuddy Register</h1>
+    <div class="main-agileinfo">
+        <div class="agileits-top">
+            <form method="post" th:action="@{/saveUser}" th:object="${user}">
+                <input class="text" th:field="*{firstName}" type="text" name="first name" placeholder="First Name" required="">
+                <input class="text " th:field="*{lastName}" type="text" name="last name" placeholder="Last Name" required="">
+                <input class="text email" th:field="*{email}" type="email" name="email" placeholder="Email" required="">
+                <input class="text" th:field="*{password}" type="password" name="password" placeholder="Password" required="">
+                <input class="text" th:field="*{address}" type="text" name="address" placeholder="Address" required="">
+                <p>Birthdate</p>
+                <input class="date" th:field="*{birthdate}" type="date" name="Birthdate" placeholder="Birthdate" required="">
+                <div class="wthree-text">
+                    <label class="anim">
+                        <input type="checkbox" class="checkbox" required="">
+                        <span>I Agree To The Terms & Conditions</span>
+                    </label>
+                    <div class="clear"> </div>
+                </div>
+                <input type="submit" value="SIGNUP">
+            </form>
+            <p>Already have an account? <a href="login.html"> Login Now!</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
