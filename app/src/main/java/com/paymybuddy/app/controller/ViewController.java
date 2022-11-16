@@ -3,6 +3,7 @@ package com.paymybuddy.app.controller;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,8 @@ public class ViewController {
         return "register";
     }
     @GetMapping("/home")
-    public String home(Model model, Principal principal) {
-        User user = userService.findByEmail(principal.getName());
+    public String home(@AuthenticationPrincipal User user, Model model) {
+//        User user = userService.findByEmail(user.getEmail());
         model.addAttribute("firstName", user.getFirstName());
         model.addAttribute("credit", user.getCredit());
         return "home";
