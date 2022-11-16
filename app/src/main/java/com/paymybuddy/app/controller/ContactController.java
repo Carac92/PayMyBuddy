@@ -3,8 +3,9 @@ package com.paymybuddy.app.controller;
 import com.paymybuddy.app.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.security.Principal;
 
@@ -15,7 +16,7 @@ public class ContactController {
     private ContactService contactService;
 
     @PostMapping("/saveContact")
-    public String saveContact(Principal principal, @RequestParam String contactEmail){
+    public String saveContact(Principal principal, @ModelAttribute String contactEmail){
 
         contactService.addContact(principal, contactEmail);
 
