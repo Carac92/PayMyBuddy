@@ -1,43 +1,31 @@
 package com.paymybuddy.app.model;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name="Contacts")
 public class Contact {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_id", nullable = false)
     private Long contactID;
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-    @Column(name = "email_address", nullable = false)
-    private String email;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Optional<User> user;
 
-    //GETTERS AND SETTERS
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_contact_id")
+    private User contactUser;
+
+
+//GETTERS AND SETTERS
 
     public Long getContactID() {
         return contactID;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public User getUser() {
+    public Optional<User> getUser() {
         return user;
     }
 
@@ -45,19 +33,14 @@ public class Contact {
         this.contactID = contactID;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setUser(User user) {
+    public void setUser(Optional<User> user) {
         this.user = user;
+    }
+    public User getContactUser() {
+        return contactUser;
+    }
+
+    public void setContactUser(User contactUser) {
+        this.contactUser = contactUser;
     }
 }
