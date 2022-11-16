@@ -16,7 +16,7 @@ public class Contact {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_contact_id")
-    private User contactUser;
+    private Optional<User> contactUser;
 
 
 //GETTERS AND SETTERS
@@ -24,23 +24,20 @@ public class Contact {
     public Long getContactID() {
         return contactID;
     }
-
-    public Optional<User> getUser() {
-        return user;
-    }
-
     public void setContactID(Long contactID) {
         this.contactID = contactID;
     }
-
+    public Optional<User> getUser() {
+        return user;
+    }
     public void setUser(Optional<User> user) {
         this.user = user;
     }
-    public User getContactUser() {
+    public Optional<User> getContactUser() {
         return contactUser;
     }
 
-    public void setContactUser(User contactUser) {
+    public void setContactUser(Optional<User> contactUser) {
         this.contactUser = contactUser;
     }
 }

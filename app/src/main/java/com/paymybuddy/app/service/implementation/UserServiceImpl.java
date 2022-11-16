@@ -38,4 +38,14 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getById(Long id) {
         return userRepository.findById(id);
     }
+
+    @Override
+    public void updateUserById(Long id, User modifiedUser) {
+        Optional<User> user = userRepository.findById(id);
+        user.get().setFirstName(modifiedUser.getFirstName());
+        user.get().setLastName(modifiedUser.getLastName());
+        user.get().setBirthdate(modifiedUser.getBirthdate());
+        user.get().setAddress(modifiedUser.getAddress());
+        user.get().setPassword(modifiedUser.getPassword());
+    }
 }
