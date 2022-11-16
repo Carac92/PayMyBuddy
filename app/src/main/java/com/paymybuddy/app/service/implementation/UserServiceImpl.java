@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.Optional;
 
 /**
@@ -40,12 +41,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserById(Long id, User modifiedUser) {
-        Optional<User> user = userRepository.findById(id);
-        user.get().setFirstName(modifiedUser.getFirstName());
-        user.get().setLastName(modifiedUser.getLastName());
-        user.get().setBirthdate(modifiedUser.getBirthdate());
-        user.get().setAddress(modifiedUser.getAddress());
-        user.get().setPassword(modifiedUser.getPassword());
+    public void updateUserById(Principal principal, User modifiedUser) {
+        User user = userRepository.findByEmail(principal.getName());
+        user.setFirstName(modifiedUser.getFirstName());
+        user.setLastName(modifiedUser.getLastName());
+        user.setBirthdate(modifiedUser.getBirthdate());
+        user.setAddress(modifiedUser.getAddress());
+        user.setPassword(modifiedUser.getPassword());
     }
 }

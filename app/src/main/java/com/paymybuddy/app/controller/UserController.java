@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.text.DateFormat;
 
 @Controller
@@ -23,8 +24,8 @@ public class UserController {
         return "login";
     }
     @PutMapping("/{id}")
-    public String modifyUser(@AuthenticationPrincipal User user, @RequestBody User modifiedUser) {
-        userService.updateUserById(user.getUserID(), modifiedUser);
+    public String modifyUser(Principal principal, @RequestBody User modifiedUser) {
+        userService.updateUserById(principal, modifiedUser);
         return "home";
     }
 }

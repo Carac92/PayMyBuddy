@@ -1,12 +1,12 @@
 package com.paymybuddy.app.controller;
 
-import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.security.Principal;
 
 @Controller
 public class ContactController {
@@ -15,9 +15,9 @@ public class ContactController {
     private ContactService contactService;
 
     @PostMapping("/saveContact")
-    public String saveContact(@AuthenticationPrincipal User user, @RequestParam Long connectedUserId){
+    public String saveContact(Principal principal, @RequestParam String contactEmail){
 
-        contactService.addContact(user.getUserID(), connectedUserId);
+        contactService.addContact(principal, contactEmail);
 
         return "transfer";
     }

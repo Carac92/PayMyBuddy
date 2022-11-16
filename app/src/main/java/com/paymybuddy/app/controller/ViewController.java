@@ -23,8 +23,8 @@ public class ViewController {
         return "register";
     }
     @GetMapping("/home")
-    public String home(@AuthenticationPrincipal User user, Model model) {
-//        User user = userService.findByEmail(user.getEmail());
+    public String home(Principal principal, Model model) {
+        User user = userService.findByEmail(principal.getName());
         model.addAttribute("firstName", user.getFirstName());
         model.addAttribute("credit", user.getCredit());
         return "home";

@@ -7,6 +7,7 @@ import com.paymybuddy.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -25,10 +26,11 @@ public class ContactServiceImpl implements ContactService {
 
 
     @Override
-    public void addContact(Long connectedUserId, Long contactUserId) {
+    public void addContact(Principal principal, String contactEmail) {
         Contact contact = new Contact();
-        contact.setUser(userService.getById(connectedUserId).get());
-        contact.setContactUser(userService.getById(connectedUserId).get());
+        contact.setUser(userService.findByEmail(principal.getName()));
+        contact.setContactUser(userService.findByEmail(contactEmail));
+        contactRepository.save(contact);
     }
 
 
