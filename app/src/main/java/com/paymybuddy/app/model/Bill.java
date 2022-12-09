@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "bill_id", nullable = false)
-    private Long billID;
+    @Column(name = "id", nullable = false)
+    private Long id;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id" )
     private User user;
@@ -18,8 +18,8 @@ public class Bill {
 
     // GETTERS AND SETTERS
 
-    public Long getBillID() {
-        return billID;
+    public Long getId() {
+        return id;
     }
 
     public User getUser() {

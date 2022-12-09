@@ -1,6 +1,8 @@
 package com.paymybuddy.app.model;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,20 +15,21 @@ import java.util.List;
 @Table(name = "Users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id", nullable = false)
-    private Long userID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
     @Column(name = "first_name", nullable = false)
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "email_address", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "address", nullable = false)
     private String address;
     @Column(name = "birthdate", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
     @Column(name = "credit", nullable = false)
     private BigDecimal credit;
@@ -59,12 +62,12 @@ public class User {
 
     // GETTERS AND SETTERS
 
-    public Long getUserID() {
-        return userID;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {

@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.security.Principal;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -38,4 +40,28 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getById(Long id) {
         return userRepository.findById(id);
     }
+
+    @Override
+    public boolean updateConnectedUser(Principal principal, User modifiedUser) {
+        User user = userRepository.findByEmail(principal.getName());
+        user.setFirstName(modifiedUser.getFirstName());
+        user.setLastName(modifiedUser.getLastName());
+        user.setBirthdate(modifiedUser.getBirthdate());
+        user.setAddress(modifiedUser.getAddress());
+        user.setPassword(passwordEncoder.encode(modifiedUser.getPassword()));
+        userRepository.save(user);
+        return Objects.equals(userRepository.findByEmail(principal.getName()).getFirstName(),modifiedUser.getFirstName());
+    }
+
+    @Override
+    public void updateCreditForUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteConnectedUser(Principal principal) {
+        User user = userRepository.findByEmail(principal.getName());
+        userRepository.deleteById(user.getId());
+    }
+
 }

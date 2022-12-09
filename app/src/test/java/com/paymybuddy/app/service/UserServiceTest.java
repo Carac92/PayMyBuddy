@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.Date;
 import java.util.Optional;
 
@@ -24,9 +27,12 @@ public class UserServiceTest {
     private UserRepository userRepository;
     @Mock
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Mock
+    private Principal principal;
+
 
     @Test
-    public void testSaveUser() throws Exception {
+    void testSaveUser() throws Exception {
         User user = new User();
         user.setPassword("test");
         user.setAddress("test");
@@ -42,7 +48,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetUserByEmail() throws Exception {
+    void testGetUserByEmail() throws Exception {
         User user = new User();
         user.setPassword("test");
         user.setAddress("test");
@@ -52,12 +58,12 @@ public class UserServiceTest {
         user.setLastName("test");
 
         when(userRepository.findByEmail(user.getEmail())).thenReturn(user);
-        User result = userRepository.findByEmail(user.getEmail());
-        assertThat(result).isNotNull();
+        User result = userService.findByEmail(user.getEmail());
+        assertThat(result.getLastName()).isEqualTo(user.getLastName());
     }
 
     @Test
-    public void testGetUserById() throws Exception {
+    void testGetUserById() throws Exception {
         User user = new User();
         user.setPassword("test");
         user.setAddress("test");
@@ -69,5 +75,67 @@ public class UserServiceTest {
         when (userRepository.findById(anyLong())).thenReturn(Optional.of(user));
         Optional<User> result = userService.getById((long)1);
         assertThat(result).isNotNull();
+    }
+    @Test
+    void testDeleteUserByUserId() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setPassword("test");
+        user.setAddress("test");
+        user.setEmail("test");
+        user.setBirthdate(new Date(10/10/2000));
+        user.setFirstName("test");
+        user.setLastName("test");
+
+        when(principal.getName()).thenReturn("test");
+        when(userService.findByEmail("test")).thenReturn(user);
+       userService.deleteConnectedUser(principal);
+        verify(userRepository,times(1));
+    }
+    @Test
+    void testModificationUserByUserID() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setPassword("test");
+        user.setAddress("test");
+        user.setEmail("test");
+        user.setBirthdate(new Date(10/10/2000));
+        user.setFirstName("test");
+        user.setLastName("test");
+        User modifiedUser = new User();
+        modifiedUser.setId(user.getId());
+        modifiedUser.setPassword("test123");
+        modifiedUser.setAddress(user.getAddress());
+        modifiedUser.setEmail(user.getEmail());
+        modifiedUser.setBirthdate(user.getBirthdate());
+        modifiedUser.setFirstName(user.getFirstName());
+        modifiedUser.setLastName(user.getLastName());
+
+        when(userRepository.save(any())).thenReturn(modifiedUser);
+        when(principal.getName()).thenReturn("test");
+        when(userService.findByEmail(principal.getName())).thenReturn(user);
+
+        boolean result = userService.updateConnectedUser(principal, modifiedUser);
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void testUpdateCreditForUser() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setPassword("test");
+        user.setAddress("test");
+        user.setEmail("test");
+        user.setBirthdate(new Date(10/10/2000));
+        user.setFirstName("test");
+        user.setLastName("test");
+        user.setCredit(BigDecimal.valueOf(100.00));
+
+        userService.updateCreditForUser(user);
+
+        when(userRepository.save(any())).thenReturn(user);
+
+        verify(userRepository,times(1)).save(any());
     }
 }
