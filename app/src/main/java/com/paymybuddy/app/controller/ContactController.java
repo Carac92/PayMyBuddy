@@ -20,9 +20,8 @@ public class ContactController {
         contactService.addContact(principal, contactEmail);
         return "transfer";
     }
-//    @GetMapping
-//    public String getContacts(Principal principal, Model model){
-//
-//    }
+
+    // TODO Create rest of the controller
+
 
 }

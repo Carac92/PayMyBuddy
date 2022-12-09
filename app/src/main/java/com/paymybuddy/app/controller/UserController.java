@@ -9,20 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @Controller
-@RequestMapping(value ="/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @GetMapping("/register")
+    public String register(@ModelAttribute User user) {
+        return "register";
+    }
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute User user) {
         userService.addUser(user);
-        return "login";
+        return "redirect:/login";
     }
-    @PutMapping("/{id}")
-    public String modifyUser(Principal principal, @ModelAttribute User modifiedUser) {
+    @PutMapping("/user/{id}")
+    public String modifyUser(@PathVariable Integer id, Principal principal, @ModelAttribute User modifiedUser) {
         userService.updateConnectedUser(principal, modifiedUser);
-        return "home";
+        return "profile";
     }
 }
