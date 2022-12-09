@@ -6,11 +6,13 @@ import java.security.Principal;
 import java.util.List;
 
 public interface ContactService {
-    Contact getContactByUserIdAndContactId(Long userId, Long contactId);
+    Contact getContactWithConnectedUserAndContactId(Principal principal, String contactEmail);
 
     void addContact(Principal principal, String contactEmail);
 
-    List<Contact> getAllContactsByUserId(Long userId);
+    List<Contact> getAllContactsForConnectedUser(Principal principal);
+
+    boolean removeContact(Principal principal, String contactEmail);
 
 
 }

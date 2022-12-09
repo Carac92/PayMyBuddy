@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -41,12 +42,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserById(Principal principal, User modifiedUser) {
+    public boolean updateConnectedUser(Principal principal, User modifiedUser) {
         User user = userRepository.findByEmail(principal.getName());
         user.setFirstName(modifiedUser.getFirstName());
         user.setLastName(modifiedUser.getLastName());
         user.setBirthdate(modifiedUser.getBirthdate());
         user.setAddress(modifiedUser.getAddress());
-        user.setPassword(modifiedUser.getPassword());
+        user.setPassword(passwordEncoder.encode(modifiedUser.getPassword()));
+        userRepository.save(user);
+        return Objects.equals(userRepository.findByEmail(principal.getName()).getFirstName(),modifiedUser.getFirstName());
     }
+
+    @Override
+    public void updateCreditForUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteConnectedUser(Principal principal) {
+        User user = userRepository.findByEmail(principal.getName());
+        userRepository.deleteById(user.getId());
+    }
+
 }

@@ -7,10 +7,11 @@ import java.util.Date;
 @Entity
 @Table(name = "Money_Transfers")
 public class MoneyTransfer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "money_transfer_id", nullable = false)
-    private Long moneyTransferID;
+    @Column(name = "id", nullable = false)
+    private Long id;
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
     @Column(name = "transfer_date", nullable = false)
@@ -23,13 +24,15 @@ public class MoneyTransfer {
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
+
+
     //GETTERS AND SETTERS
-    public Long getMoneyTransferID() {
-        return moneyTransferID;
+    public Long getId() {
+        return id;
     }
 
-    public void setMoneyTransferID(Long moneyTransferID) {
-        this.moneyTransferID = moneyTransferID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getAmount() {
@@ -62,5 +65,13 @@ public class MoneyTransfer {
 
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+    public MoneyTransfer(BigDecimal amount, Date transferDate, User user, Contact contact) {
+        this.amount = amount;
+        this.transferDate = transferDate;
+        this.user = user;
+        this.contact = contact;
+    }
+    public MoneyTransfer() {
     }
 }

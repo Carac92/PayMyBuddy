@@ -12,5 +12,7 @@ public interface UserService {
     void addUser(User user);
     User findByEmail(String email);
     Optional<User> getById(Long id);
-    void updateUserById(Principal principal, User modifiedUser);
+    boolean updateConnectedUser(Principal principal, User modifiedUser);
+    void updateCreditForUser(User user);
+    void deleteConnectedUser(Principal principal);
 }

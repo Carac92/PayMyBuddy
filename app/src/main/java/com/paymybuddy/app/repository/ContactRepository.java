@@ -10,8 +10,9 @@ import java.util.List;
 public interface ContactRepository extends JpaRepository<Contact,Long> {
 
 
-    Contact findContactByUserUserIDAndContactID(Long userId, Long contactId);
+    Contact findContactByUserIdAndContactUserId(Long userId, Long contactUserId);
 
-    List<Contact> findAllByUserUserID(Long userId);
+    List<Contact> findAllByUserId(Long userId);
+    Long deleteContactByUserIdAndContactUserId(Long userId, Long contactUserId);
 
 }

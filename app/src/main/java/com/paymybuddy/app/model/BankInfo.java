@@ -9,8 +9,8 @@ import javax.persistence.*;
 public class BankInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "bank_info_id", nullable = false)
-    private Long bankInfoID;
+    @Column(name = "id", nullable = false)
+    private Long id;
     @Column(name = "iban", nullable = false)
     private String iban;
     @Column(name = "bic", nullable = false)
@@ -24,12 +24,12 @@ public class BankInfo {
 
     // GETTERS AND SETTERS
 
-    public Long getBankInfoID() {
-        return bankInfoID;
+    public Long getId() {
+        return id;
     }
 
-    public void setBankInfoID(Long bankInfoID) {
-        this.bankInfoID = bankInfoID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getIban() {
