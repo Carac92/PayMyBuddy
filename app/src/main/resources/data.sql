@@ -25,7 +25,7 @@ FOREIGN KEY (user_id) REFERENCES Users(id)
 INSERT INTO Users (email, password, first_name, last_name, address, birthdate, credit)
 VALUES ('jean.dupont@mail.com', '$2y$10$dQoHaaFjLCrVb7PuXLKvMOnLJw.CfKFkac4bKOe19IajddHfo0YCi', 'Jean', 'Dupont',
  '1234 avenue', DATE '1989-07-03', 1000);
---mdp123
+-- mdp123
 INSERT INTO Users (email, password, first_name, last_name, address, birthdate, credit)
 VALUES ('marie.dupont@mail.com', '$2y$10$dQoHaaFjLCrVb7PuXLKvMOnLJw.CfKFkac4bKOe19IajddHfo0YCi', 'Marie', 'Dupont',
  '1234 avenue', DATE '1988-05-02', 1000);
@@ -48,19 +48,22 @@ FOREIGN KEY (user_id) REFERENCES Users(id),
 FOREIGN KEY(contact_user_id) REFERENCES Users(id)
 );
 
-CREATE TABLE MoneyTransfers(
+CREATE TABLE Money_Transfers(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 contact_id INTEGER NOT NULL,
 user_id INTEGER NOT NULL,
 transfer_date DATE NOT NULL,
 amount DECIMAL(10,2) Not NULL,
+description VARCHAR(255) NOT NULL,
 FOREIGN KEY (user_id) REFERENCES Users(id),
-FOREIGN KEY (contact_id) REFERENCES Contacts(id)
+FOREIGN KEY (contact_id) REFERENCES Users(id)
 );
 
 CREATE TABLE Bills(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 user_id INTEGER NOT NULL,
+money_transfer_id INTEGER NOT NULL,
 price DECIMAL(10,2) NOT NULL,
-FOREIGN KEY (user_id) REFERENCES Users(id)
+FOREIGN KEY (user_id) REFERENCES Users(id),
+FOREIGN KEY (money_transfer_id) REFERENCES Money_Transfers(id)
 );

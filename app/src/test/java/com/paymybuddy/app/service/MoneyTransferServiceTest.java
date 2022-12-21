@@ -66,7 +66,7 @@ public class MoneyTransferServiceTest {
         contact.setId(1L);
 
         List <MoneyTransfer> moneyTransfers = new ArrayList<MoneyTransfer>();
-        MoneyTransfer moneyTransfer = new MoneyTransfer (BigDecimal.valueOf(30.00), Date.valueOf(LocalDate.now()),user,contact);
+        MoneyTransfer moneyTransfer = new MoneyTransfer (BigDecimal.valueOf(30.00), Date.valueOf(LocalDate.now()),user, user2);
         moneyTransfers.add(moneyTransfer);
 
 
@@ -80,7 +80,7 @@ public class MoneyTransferServiceTest {
     @Test
     public void testMoneyTransfer() throws Exception {
 
-        moneyTransferService.addMoneyTransfer(principal, "test2", BigDecimal.valueOf(30.00));
+        moneyTransferService.addMoneyTransfer(principal, "test2", BigDecimal.valueOf(30.00), "description");
         verify(moneyTransferRepository, times(1)).save(any());
     }
 

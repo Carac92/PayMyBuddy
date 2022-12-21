@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>PayMyBuddy</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="btn btn-success btn-large" th:href="@{home}">PayMyBuddy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{home}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{transfer}">Transfer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{profile}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{contact}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{login}">Log off</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <h2>Send Money</h2>
+  <form class="row g-3" method="POST" th:action="@{/contact/saveContact}">
+    <div class="col-auto">
+      <label for="contactEmail" class="visually-hidden"></label>
+      <input type="text" th:value="${contactEmail}" th:name="contactEmail" class="form-control" id="contactEmail" placeholder="Email address of contact">
+      <button th:type="submit" class="btn btn-primary mb-3">add Contact</button>
+    </div>
+  </form>
+</div>
+<div class="container">
+    <form class="row g-3" method="POST" th:action="@{/transfer/addTransfer}">
+      <div class="col-auto">
+        <div th:if="${contacts!=null and !contacts.empty}">
+          <select class="form-select" aria-label="Default select example" th:name="contactEmail">
+            <option selected>Select Contact</option>
+            <option th:each="contact:${contacts}"
+                    th:value="${contact.getContactUser().getEmail()}"
+                    th:text="${contact.getContactUser().getFirstName()+ ' '+ contact.getContactUser().getLastName()}"></option>
+            </select>
+        </div>
+        <div th:unless="${contacts!=null and !contacts.empty}">
+          <p>No contact added</p>
+        </div>
+        <input type="text" th:value="${description}" th:name="description" class="form-control"  placeholder="Description">
+        <input type="number" th:value="${amount}" th:name="amount" class="form-control" placeholder="Amount">
+        <button th:type="submit" class="btn btn-success mb-3">Pay</button>
+      </div>
+    </form>
+</div>
+<div class="container">
+  <h2>Transactions</h2>
+  <div th:if="${transfers!=null and !transfers.empty}">
+      <table class="table table-striped table-hover">
+        <tr class="table-success" >
+          <th>Contact</th>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+        <tr th:each="transfer:${transfers}" >
+          <th th:text="${transfer.getContact().getFirstName()+ ' '
+          + transfer.getContact().getLastName()}"></th>
+          <th th:text="${transfer.getDescription()}"></th>
+          <th th:text="${transfer.getAmount()}+'€'"></th>
+        </tr>
+      </table>
+  </div>
+  <div th:unless="${transfers!=null and !transfers.empty}">
+    <p>No transactions done</p>
+  </div>
+</div>
+</body>
+<footer>
+  <p>About Us</p>
+  <p><a href="mailto:support@paymybuddy.com">Support</a></p>
+</footer>
+</html>

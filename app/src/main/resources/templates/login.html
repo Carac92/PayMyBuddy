@@ -1,9 +1,5 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <title>Pay My Buddy login</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -13,7 +9,7 @@
 <body>
 <div class="container">
   <form class="form-signin" method="post" action="/login">
-    <h2 class="form-signin-heading">Pay My Buddy</h2>
+    <h2 class="btn btn-success btn-large">Pay My Buddy</h2>
     <p>
       <label for="username" class="sr-only">Username</label>
       <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
@@ -29,7 +25,14 @@
       <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
     </p>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    <a th:href="@{/profile/register}">
+      <button class="btn btn-lg btn-outline-secondary btn-block" type="not registered">Not Registered? Sign up</button>
+    </a>
   </form>
 </div>
 </body>
+<footer>
+  <p>About Us</p>
+  <p><a href="mailto:support@paymybuddy.com">Support</a></p>
+</footer>
 </html>

@@ -9,11 +9,13 @@ import java.util.Date;
 public class MoneyTransfer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
+    @Column(name = "description", nullable = false)
+    private String description;
     @Column(name = "transfer_date", nullable = false)
     private Date transferDate;
 
@@ -22,7 +24,9 @@ public class MoneyTransfer {
     private User user;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
-    private Contact contact;
+    private User contact;
+    @OneToOne(mappedBy = "moneyTransfer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Bill bill;
 
 
 
@@ -59,14 +63,30 @@ public class MoneyTransfer {
         this.user = user;
     }
 
-    public Contact getContact() {
+    public void setContact(User contact) {
+        this.contact = contact;
+    }
+    public User getContact() {
         return contact;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public String getDescription() {
+        return description;
     }
-    public MoneyTransfer(BigDecimal amount, Date transferDate, User user, Contact contact) {
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
+    public MoneyTransfer(BigDecimal amount, Date transferDate, User user, User contact) {
         this.amount = amount;
         this.transferDate = transferDate;
         this.user = user;

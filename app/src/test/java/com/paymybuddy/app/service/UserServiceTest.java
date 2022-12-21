@@ -87,10 +87,8 @@ public class UserServiceTest {
         user.setFirstName("test");
         user.setLastName("test");
 
-        when(principal.getName()).thenReturn("test");
-        when(userService.findByEmail("test")).thenReturn(user);
-       userService.deleteConnectedUser(principal);
-        verify(userRepository,times(1));
+        userService.deleteConnectedUser(user.getId());
+        verify(userRepository,times(1)).deleteById(1L);
     }
     @Test
     void testModificationUserByUserID() throws Exception {

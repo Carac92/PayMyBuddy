@@ -6,7 +6,8 @@ import java.security.Principal;
 
 public interface BankInfoService {
      void addBankInfo(Principal principal, BankInfo bankInfo);
-     boolean removeBankInfoForUser(Principal principal);
+
+    void deleteById(long bankInfoId);
+
     BankInfo getBankInfoForUser(Principal principal);
-    boolean updateBankInfoForUser(Principal principal, BankInfo bankInfo);
 }

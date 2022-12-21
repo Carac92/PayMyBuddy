@@ -9,7 +9,7 @@ import java.security.Principal;
 import java.util.List;
 
 public interface MoneyTransferService {
-    void addMoneyTransfer(Principal principal, String contact, BigDecimal amount) throws ClassNotFoundException, ChangeSetPersister.NotFoundException;
+    void addMoneyTransfer(Principal principal, String contact, BigDecimal amount, String description) throws ClassNotFoundException, ChangeSetPersister.NotFoundException;
     List<MoneyTransfer> getMoneyTransfers(Principal principal);
 
 

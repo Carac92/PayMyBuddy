@@ -22,7 +22,7 @@ public class User {
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
@@ -34,29 +34,24 @@ public class User {
     @Column(name = "credit", nullable = false)
     private BigDecimal credit;
     // DB links
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
                 orphanRemoval = true)
-    @JoinColumn(name = "user_id")
     private List <BankInfo> bankInfos;
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
               orphanRemoval = true)
-    @JoinColumn(name = "user_id")
     private List<CreditCardInfo> creditCardInfos;
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JoinColumn(name = "user_id")
     private List<MoneyTransfer> moneyTransfers;
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
                 orphanRemoval = true)
-    @JoinColumn(name = "user_id")
     private List<Contact> contacts;
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
                 orphanRemoval = true)
-    @JoinColumn(name ="user_id")
     private List<Bill> bills;
 
 

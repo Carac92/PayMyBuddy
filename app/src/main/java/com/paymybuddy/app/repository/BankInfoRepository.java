@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BankInfoRepository extends JpaRepository<BankInfo,Long> {
     BankInfo getBankInfoByUserId(Long userID);
-    Long deleteBankInfoByUserId(Long userID);
+    void deleteById(Long id);
 
 }

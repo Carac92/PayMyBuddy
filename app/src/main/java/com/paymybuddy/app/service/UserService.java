@@ -9,10 +9,10 @@ import java.util.Optional;
  * Interface of UserService.
  */
 public interface UserService {
-    void addUser(User user);
+    boolean addUser(User user);
     User findByEmail(String email);
     Optional<User> getById(Long id);
     boolean updateConnectedUser(Principal principal, User modifiedUser);
     void updateCreditForUser(User user);
-    void deleteConnectedUser(Principal principal);
+    void deleteConnectedUser(Long id);
 }
