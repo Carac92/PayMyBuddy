@@ -25,10 +25,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void addUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCredit(BigDecimal.ZERO);
-        userRepository.save(user);
+    public boolean addUser(User user) {
+        if(userRepository.findByEmail(user.getEmail())==null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setCredit(BigDecimal.ZERO);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -59,9 +63,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteConnectedUser(Principal principal) {
-        User user = userRepository.findByEmail(principal.getName());
-        userRepository.deleteById(user.getId());
+    public void deleteConnectedUser(Long id) {
+        userRepository.deleteById(id);
     }
 
 }

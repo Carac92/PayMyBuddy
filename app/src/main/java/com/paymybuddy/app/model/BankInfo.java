@@ -8,17 +8,17 @@ import javax.persistence.*;
 @Table(name = "Bank_Info")
 public class BankInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "iban", nullable = false)
     private String iban;
     @Column(name = "bic", nullable = false)
-    private String bin;
+    private String bic;
     @Column(name = "name_of_account", nullable = false)
     private String nameOfAccount;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -40,12 +40,12 @@ public class BankInfo {
         this.iban = iban;
     }
 
-    public String getBin() {
-        return bin;
+    public String getBic() {
+        return bic;
     }
 
-    public void setBin(String bin) {
-        this.bin = bin;
+    public void setBic(String bin) {
+        this.bic = bin;
     }
 
     public String getNameOfAccount() {

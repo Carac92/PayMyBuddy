@@ -1,6 +1,5 @@
 package com.paymybuddy.app.service.implementation;
 
-import com.paymybuddy.app.model.Contact;
 import com.paymybuddy.app.model.MoneyTransfer;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.MoneyTransferRepository;
@@ -9,7 +8,6 @@ import com.paymybuddy.app.service.ContactService;
 import com.paymybuddy.app.service.MoneyTransferService;
 import com.paymybuddy.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -34,17 +32,17 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
     private BillService billService;
 
     @Override
-    public void addMoneyTransfer(Principal principal, String contactEmail, BigDecimal amount) throws ChangeSetPersister.NotFoundException {
+    public void addMoneyTransfer(Principal principal, String contactEmail, BigDecimal amount, String description){
         User connectedUser = userService.findByEmail(principal.getName());
         User contactUser = userService.findByEmail(contactEmail);
-        Contact contact = contactService.getContactWithConnectedUserAndContactId(principal,contactEmail);
 
         MoneyTransfer moneyTransfer = new MoneyTransfer();
         moneyTransfer.setTransferDate(Date.valueOf(LocalDate.now()));
         moneyTransfer.setAmount(amount.multiply(BigDecimal.valueOf(0.95)));
-        billService.addBill(principal, amount);
+        moneyTransfer.setDescription(description);
         moneyTransfer.setUser(connectedUser);
-        moneyTransfer.setContact(contact);
+        moneyTransfer.setContact(contactUser);
+        billService.addBill(principal, moneyTransfer , amount);
         moneyTransferRepository.save(moneyTransfer);
 
         contactUser.setCredit(contactUser.getCredit().add(moneyTransfer.getAmount()));

@@ -13,6 +13,6 @@ public interface ContactRepository extends JpaRepository<Contact,Long> {
     Contact findContactByUserIdAndContactUserId(Long userId, Long contactUserId);
 
     List<Contact> findAllByUserId(Long userId);
-    Long deleteContactByUserIdAndContactUserId(Long userId, Long contactUserId);
+    void deleteById(Long id);
 
 }

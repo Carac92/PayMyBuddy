@@ -12,7 +12,7 @@ public interface ContactService {
 
     List<Contact> getAllContactsForConnectedUser(Principal principal);
 
-    boolean removeContact(Principal principal, String contactEmail);
+    void removeContact(Principal principal, Long id);
 
 
 }

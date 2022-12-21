@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 @Table(name = "Bills")
 public class Bill {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -15,6 +15,9 @@ public class Bill {
     private User user;
     @Column(name = "price", nullable = false)
     private BigDecimal price;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "money_transfer_id")
+    private MoneyTransfer moneyTransfer;
 
     // GETTERS AND SETTERS
 
@@ -36,5 +39,13 @@ public class Bill {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public MoneyTransfer getMoneyTransfer() {
+        return moneyTransfer;
+    }
+
+    public void setMoneyTransfer(MoneyTransfer moneyTransfer) {
+        this.moneyTransfer = moneyTransfer;
     }
 }

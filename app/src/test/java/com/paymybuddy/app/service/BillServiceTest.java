@@ -1,6 +1,7 @@
 package com.paymybuddy.app.service;
 
 import com.paymybuddy.app.model.Bill;
+import com.paymybuddy.app.model.MoneyTransfer;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.BillRepository;
 import com.paymybuddy.app.service.implementation.BillServiceImpl;
@@ -57,7 +58,7 @@ public class BillServiceTest {
     }
     @Test
     void testAddBillForUser() throws Exception {
-        billService.addBill(principal, BigDecimal.valueOf(30.00));
+        billService.addBill(principal,new MoneyTransfer(), BigDecimal.valueOf(30.00));
         verify(billRepository,times(1)).save(any());
     }
     @Test

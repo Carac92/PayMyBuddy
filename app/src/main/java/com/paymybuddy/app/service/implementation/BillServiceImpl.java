@@ -1,6 +1,7 @@
 package com.paymybuddy.app.service.implementation;
 
 import com.paymybuddy.app.model.Bill;
+import com.paymybuddy.app.model.MoneyTransfer;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.BillRepository;
 import com.paymybuddy.app.service.BillService;
@@ -20,11 +21,12 @@ public class BillServiceImpl implements BillService {
 
 
     @Override
-    public void addBill(Principal principal, BigDecimal amount) {
+    public void addBill(Principal principal, MoneyTransfer moneyTransfer, BigDecimal amount) {
         Bill bill = new Bill();
         User user = userService.findByEmail(principal.getName());
         bill.setPrice(amount.multiply(BigDecimal.valueOf(0.05)));
         bill.setUser(user);
+        bill.setMoneyTransfer(moneyTransfer);
         billRepository.save(bill);
     }
 

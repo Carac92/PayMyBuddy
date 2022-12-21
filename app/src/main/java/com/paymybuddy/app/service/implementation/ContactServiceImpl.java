@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -32,9 +31,12 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public void addContact(Principal principal, String contactEmail) {
         Contact contact = new Contact();
-        contact.setUser(userService.findByEmail(principal.getName()));
-        contact.setContactUser(userService.findByEmail(contactEmail));
-        contactRepository.save(contact);
+        User contactUser = userService.findByEmail(contactEmail);
+        if(contactUser!=null) {
+            contact.setUser(userService.findByEmail(principal.getName()));
+            contact.setContactUser(contactUser);
+            contactRepository.save(contact);
+        }
     }
 
 
@@ -44,11 +46,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public boolean removeContact(Principal principal, String contactEmail) {
-        User user = userService.findByEmail(principal.getName());
-        User contactUser = userService.findByEmail(contactEmail);
-        Contact contact= contactRepository.findContactByUserIdAndContactUserId(user.getId(), contactUser.getId());
-        Long suppressedContact=contactRepository.deleteContactByUserIdAndContactUserId(user.getId(), contactUser.getId());
-        return Objects.equals(suppressedContact, contact.getId());
+    public void removeContact(Principal principal, Long id) {
+       contactRepository.deleteById(id);
     }
 }

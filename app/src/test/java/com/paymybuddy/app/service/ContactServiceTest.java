@@ -63,8 +63,6 @@ public class ContactServiceTest {
         when(userService.findByEmail("test2")).thenReturn(user2);
         when(contactRepository.findContactByUserIdAndContactUserId(user.getId(), user2.getId())).thenReturn(contact);
         when(contactRepository.findAllByUserId(user.getId())).thenReturn(contactList);
-        when(contactRepository.deleteContactByUserIdAndContactUserId(user.getId(), user2.getId())).thenReturn(1L);
-
     }
 
     @Test
@@ -89,7 +87,7 @@ public class ContactServiceTest {
     }
     @Test
     void testRemoveContactForUser() throws Exception {
-        boolean result = contactService.removeContact(principal, "test2");
-        assertThat(result).isTrue();
+        contactService.removeContact(principal,1L);
+        verify(contactRepository, times(1)).deleteById(1L);
     }
 }

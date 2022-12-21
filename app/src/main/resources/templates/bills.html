@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>PayMyBuddy</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="btn btn-success btn-large" th:href="@{home}">PayMyBuddy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{home}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{transfer}">Transfer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{profile}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{contact}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{login}">Log off</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <h2>Bills</h2>
+  <div th:if="${bills!=null and !bills.empty}">
+    <table class="table table-striped table-hover">
+      <tr class="table-success" >
+        <th>Date</th>
+        <th>Description</th>
+        <th>Fees</th>
+      </tr>
+      <tr th:each="bill:${bills}" >
+        <th th:text="${bill.getMoneyTransfer().getTransferDate()}"></th>
+        <th th:text="${bill.getMoneyTransfer().getDescription()}"></th>
+        <th th:text="${bill.getPrice()}+'€'"></th>
+      </tr>
+    </table>
+  </div>
+  <div th:unless="${bills!=null and !bills.empty}">
+    <p>No transactions done, no bills</p>
+  </div>
+</div>
+</body>
+<footer>
+  <p>About Us</p>
+  <p><a href="mailto:support@paymybuddy.com">Support</a></p>
+</footer>
+</html>

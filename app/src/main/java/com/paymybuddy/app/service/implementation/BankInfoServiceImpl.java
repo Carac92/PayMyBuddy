@@ -27,11 +27,8 @@ public class BankInfoServiceImpl implements BankInfoService {
     }
 
     @Override
-    public boolean removeBankInfoForUser(Principal principal) {
-        User user = userService.findByEmail(principal.getName());
-        BankInfo bankInfo = bankInfoRepository.getBankInfoByUserId(user.getId());
-        Long suppressedBankInfo =bankInfoRepository.deleteBankInfoByUserId(user.getId());
-        return Objects.equals(suppressedBankInfo, bankInfo.getId());
+    public void deleteById(long bankInfoId) {
+        bankInfoRepository.deleteById(bankInfoId);
     }
 
     @Override
@@ -39,12 +36,4 @@ public class BankInfoServiceImpl implements BankInfoService {
         return bankInfoRepository.getBankInfoByUserId(userService.findByEmail(principal.getName()).getId());
     }
 
-    @Override
-    public boolean updateBankInfoForUser(Principal principal, BankInfo bankInfo) {
-        User user = userService.findByEmail(principal.getName());
-        bankInfo.setUser(user);
-        bankInfoRepository.save(bankInfo);
-        return Objects.equals(bankInfoRepository.getBankInfoByUserId(user.getId()).getBin(),
-                bankInfo.getBin());
-    }
 }

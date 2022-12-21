@@ -46,13 +46,12 @@ public class BankInfoServiceTest {
         bankInfo.setUser(user);
         bankInfo.setIban("12345");
         bankInfo.setId(1L);
-        bankInfo.setBin("1234");
+        bankInfo.setBic("1234");
         bankInfo.setNameOfAccount("test");
 
         when(principal.getName()).thenReturn("test");
         when(userService.findByEmail(principal.getName())).thenReturn(user);
         when(bankInfoRepository.getBankInfoByUserId(user.getId())).thenReturn(bankInfo);
-        when(bankInfoRepository.deleteBankInfoByUserId(user.getId())).thenReturn(1L);
 
     }
 
@@ -64,8 +63,8 @@ public class BankInfoServiceTest {
     }
     @Test
     void testRemoveBankInfoForUser() throws Exception {
-        Boolean result = bankInfoService.removeBankInfoForUser(principal);
-        assertThat(result).isTrue();
+        bankInfoService.deleteById(1L);
+        verify(bankInfoRepository, times(1)).deleteById(1L);
     }
     @Test
     void testGetBankInfoForUser() throws Exception {

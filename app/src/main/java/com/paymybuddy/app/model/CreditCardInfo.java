@@ -7,7 +7,7 @@ import java.util.Date;
 @Table(name="Credit_Card_Info")
 public class CreditCardInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long creditCardID;
     @ManyToOne(cascade = CascadeType.ALL)

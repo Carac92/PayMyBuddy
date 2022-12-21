@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>PayMyBuddy</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="btn btn-success btn-large" th:href="@{home}">PayMyBuddy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{home}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{transfer}">Transfer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{profile}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{contact}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{login}">Log off</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class = "container">
+  <h1>Profile</h1>
+  <form th:method="put" th:action="@{/profile/updateUser}" th:object="${user}">
+    <div class="mb-3">
+      <input class="form-label" th:field="*{firstName}" type="text" name="first name" th:placeholder="${user.getFirstName()}" required="">
+    </div>
+    <div class="mb-3">
+      <input class="form-label " th:field="*{lastName}" type="text" name="last name" th:placeholder="${user.getLastName()}" required="">
+    </div>
+    <div class="mb-3">
+    <input class="form-label" th:field="*{email}" type="email" name="email" th:placeholder="${user.getEmail()}" required="" disabled readonly>
+    </div>
+    <div class="mb-3">
+      <input class="form-label" th:field="*{password}" type="password" name="password" th:placeholder="${user.getPassword()}" required="">
+    </div>
+    <div class="mb-3">
+      <input class="form-label" th:field="*{address}" type="text" name="address" th:placeholder="${user.getAddress()}" required="">
+    </div>
+    <div class="mb-3">
+      <label>Birthdate</label>
+      <input class="date" th:field="*{birthdate}" type="date" name="Birthdate" th:placeholder="${user.getBirthdate()}" required="">
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+  </form>
+</div>
+<div class = "container">
+  <table class="table table-responsive" th:if="${bankInfos!=null and !bankInfos.empty}">
+    <thead>
+    <tr class="table-success">
+      <th scope="col">Name of Account</th>
+      <th scope="col">IBAN</th>
+      <th scope="col">BIC</th>
+      <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr th:each="bankInfo:${bankInfos}">
+        <td th:text="${bankInfo.getNameOfAccount}"></td>
+        <td th:text="${bankInfo.getIban()}"></td>
+        <td th:text="${bankInfo.getBic()}"></td>
+        <td >
+          <form th:action="@{profile/deleteBankInfo}" th:method="delete">
+            <input type="hidden" name="bankInfoId" th:value="${bankInfo.getId()}" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container">
+  <form method="POST" class="row g-3" th:action="@{/profile/addBankInfo}" th:object="${bankInfoToAdd}">
+    <div class="col-auto">
+      <input class="form-label " th:field="*{nameOfAccount}" type="text" name="name of account" placeholder="Name of Account" required="">
+      <input class="form-label " th:field="*{iban}" type="text" name="iban" placeholder="IBAN" required="">
+      <input class="form-label " th:field="*{bic}" type="text" name="bic" placeholder="BIC" required="">
+      <button th:type="submit" class="btn btn-primary mb-3">add BankInfo</button>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <form method="POST" th:action="@{profile/deleteUser}" th:object="${user}">
+    <input type="hidden" name="id" th:value="${user.getId()}" />
+    <button class="btn btn-danger mb-3">Delete account</button>
+  </form>
+</div>
+<div class="container">
+  <a class="btn btn-primary mb-3" th:href="@{profile/bills}">Bills</a>
+</div>
+</body>
+<footer>
+  <p>About Us</p>
+  <p><a href="mailto:support@paymybuddy.com">Support</a></p>
+</footer>
+</html>
