@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -32,8 +33,13 @@ public class BankInfoServiceImpl implements BankInfoService {
     }
 
     @Override
-    public BankInfo getBankInfoForUser(Principal principal) {
+    public List<BankInfo> getBankInfosForUser(Principal principal) {
         return bankInfoRepository.getBankInfoByUserId(userService.findByEmail(principal.getName()).getId());
+    }
+
+    @Override
+    public BankInfo getBankInfoById(long bankInfoId) {
+        return bankInfoRepository.getBankInfoById(bankInfoId);
     }
 
 }

@@ -30,15 +30,6 @@ INSERT INTO Users (email, password, first_name, last_name, address, birthdate, c
 VALUES ('marie.dupont@mail.com', '$2y$10$dQoHaaFjLCrVb7PuXLKvMOnLJw.CfKFkac4bKOe19IajddHfo0YCi', 'Marie', 'Dupont',
  '1234 avenue', DATE '1988-05-02', 1000);
 
-CREATE TABLE Credit_Card_Info (
-id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-user_id INTEGER NOT NULL,
-credit_card_number INTEGER NOT NULL,
-credit_card_name VARCHAR(255) NOT NULL,
-credit_card_expiration_date DATE NOT NULL,
-credit_card_ccv INTEGER NOT NULL,
-FOREIGN KEY(user_id) REFERENCES Users(id)
-);
 
 CREATE TABLE Contacts(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -66,4 +57,14 @@ money_transfer_id INTEGER NOT NULL,
 price DECIMAL(10,2) NOT NULL,
 FOREIGN KEY (user_id) REFERENCES Users(id),
 FOREIGN KEY (money_transfer_id) REFERENCES Money_Transfers(id)
+);
+
+CREATE TABLE Account_Transfers(
+id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+user_id INTEGER NOT NULL,
+bank_info_id INTEGER NOT NULL,
+amount DECIMAL(10,2) NOT NULL,
+transfer_date DATE NOT NULL,
+FOREIGN KEY (bank_info_id) REFERENCES Bank_Info(id),
+FOREIGN KEY (user_id) REFERENCES Users(id)
 );
