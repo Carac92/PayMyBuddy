@@ -45,11 +45,4 @@ public class UserDetailsServiceTest {
         UserDetails result = userDetailsService.loadUserByUsername("test");
         assertNotNull(result);
     }
-
-    @Test
-    public void testGivenAnEmailNonExistantShouldReturnExceptions() throws Exception {
-        when(userRepository.findByEmail(anyString())).thenReturn(null);
-        Exception exception = assertThrows(UsernameNotFoundException.class,
-                () -> userDetailsService.loadUserByUsername(""));
-    }
 }

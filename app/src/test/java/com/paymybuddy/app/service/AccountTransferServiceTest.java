@@ -74,7 +74,7 @@ public class AccountTransferServiceTest {
     @Test
     public void addTransferAccountTest(){
         accountTransferService.addAccountTransfer(principal, BigDecimal.valueOf(10.00), 1L, true);
-        verify(accountTransferRepository, times(1));
+        verify(accountTransferRepository, times(1)).save(any());
     }
     @Test
     public void getTransferAccountListTest(){
