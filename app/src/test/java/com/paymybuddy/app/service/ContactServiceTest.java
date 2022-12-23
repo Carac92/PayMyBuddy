@@ -31,7 +31,7 @@ public class ContactServiceTest {
     private Principal principal;
     @Mock
     private UserService userService;
-//TODO : do test
+
     @BeforeEach
     public void setUp() throws Exception {
         User user = new User();
