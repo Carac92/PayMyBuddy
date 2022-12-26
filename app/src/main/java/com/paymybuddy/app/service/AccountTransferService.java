@@ -7,6 +7,6 @@ import java.security.Principal;
 import java.util.List;
 
 public interface AccountTransferService {
-    void addAccountTransfer(Principal principal, BigDecimal Amount, Long BankInfoId, Boolean deposit);
+    void addAccountTransfer(Principal principal, BigDecimal amount, Long BankInfoId, Boolean deposit);
     List<AccountTransfer> getAccountTransfers(Principal principal);
 }
