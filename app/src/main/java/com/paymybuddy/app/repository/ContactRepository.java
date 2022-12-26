@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for the contact extends JpaRepository
+ */
 @Repository
 public interface ContactRepository extends JpaRepository<Contact,Long> {
 

@@ -4,7 +4,6 @@ import com.paymybuddy.app.model.MoneyTransfer;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.MoneyTransferRepository;
 import com.paymybuddy.app.service.BillService;
-import com.paymybuddy.app.service.ContactService;
 import com.paymybuddy.app.service.MoneyTransferService;
 import com.paymybuddy.app.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -19,7 +18,8 @@ import java.util.List;
 
 
 /**
- * Implementation of MoneyTransferService that permit to create a MoneyTransfer and to get all the MoneyTransfer.
+ * Implementation of MoneyTransferService autowired to User Service, Money Transfer Repository, Bill Service.
+ * Permit to create a MoneyTransfer and to get a list of all the MoneyTransfers.
  */
 @Log4j2
 @Service
@@ -28,8 +28,6 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
     private UserService userService;
     @Autowired
     private MoneyTransferRepository moneyTransferRepository;
-    @Autowired
-    private ContactService contactService;
     @Autowired
     private BillService billService;
 

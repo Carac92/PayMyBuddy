@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * Interface for Money transfer Service.
+ */
 public interface MoneyTransferService {
     void addMoneyTransfer(Principal principal, String contact, BigDecimal amount, String description) throws ClassNotFoundException, ChangeSetPersister.NotFoundException;
     List<MoneyTransfer> getMoneyTransfers(Principal principal);

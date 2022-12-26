@@ -3,6 +3,9 @@ package com.paymybuddy.app.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+/**
+ * Model for the bills of linked to a user and a money transfer.
+ */
 @Entity
 @Table(name = "Bills")
 public class Bill {

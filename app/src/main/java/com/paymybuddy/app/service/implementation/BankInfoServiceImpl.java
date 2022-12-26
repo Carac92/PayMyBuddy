@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * Implementation of Bank Info service, autowired to Bank Info Repository and User Service.
+ * Permits to add a new bank information, delete a bank information by id, get a list of all bank information for the
+ * connected user and get a bank info by id.
+ */
 @Log4j2
 @Service
 public class BankInfoServiceImpl implements BankInfoService {

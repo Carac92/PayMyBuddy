@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for Money transfer extends JpaRepository
+ */
 @Repository
 public interface MoneyTransferRepository extends JpaRepository <MoneyTransfer,Long> {
     List<MoneyTransfer> getMoneyTransferByUserId(Long userID);

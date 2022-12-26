@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for the bank informations extends JpaRepository.
+ */
 @Repository
 public interface BankInfoRepository extends JpaRepository<BankInfo,Long> {
     List<BankInfo> getBankInfoByUserId(Long userID);

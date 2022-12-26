@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * Model for money transfers inside the application between two different users.
+ */
 @Entity
 @Table(name = "Money_Transfers")
 public class MoneyTransfer {

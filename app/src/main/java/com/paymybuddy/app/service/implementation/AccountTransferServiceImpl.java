@@ -16,6 +16,10 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Implementation of Account Transfer Service autowired to User Service, Bank Info Service, Account Transfer Repository.
+ * Permit to add an Account Transfer and get a list of all account transfer.
+ */
 @Log4j2
 @Service
 public class AccountTransferServiceImpl implements AccountTransferService {

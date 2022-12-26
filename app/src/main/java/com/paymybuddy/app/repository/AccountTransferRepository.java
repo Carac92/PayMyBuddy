@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for the account transfer extends JpaRepository.
+ */
 @Repository
 public interface AccountTransferRepository extends JpaRepository<AccountTransfer,Long> {
     List<AccountTransfer> getAccountTransferByUserId(long userId);

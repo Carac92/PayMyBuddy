@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
+
+/**
+ * Implementation of Bill Service autowired to Bill Repository and User Service.
+ * Permit to create a new bill, and get a list of all bills for the connected user.
+ */
 @Log4j2
 @Service
 public class BillServiceImpl implements BillService {

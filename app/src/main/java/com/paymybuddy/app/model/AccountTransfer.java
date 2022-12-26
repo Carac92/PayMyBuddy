@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * Model for Transfer between the account of the user and one of his bank accounts.
+ */
 @Entity
 @Table(name = "Account_Transfers")
 public class AccountTransfer {

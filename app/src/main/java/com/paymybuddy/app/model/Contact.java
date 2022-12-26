@@ -2,6 +2,9 @@ package com.paymybuddy.app.model;
 
 import javax.persistence.*;
 
+/**
+ * Model for contact linked between two users.
+ */
 @Entity
 @Table(name="Contacts")
 public class Contact {

@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * Implementation of Contact Service autowired to Contact Repository and User Service.
+ * Permits to get contact with connected user and contact email, to add contact for connected user with email address of
+ * the contact, get a list of all contacts, remove a contact with his id.
+ */
 @Log4j2
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -23,7 +28,7 @@ public class ContactServiceImpl implements ContactService {
 
 
     @Override
-    public Contact getContactWithConnectedUserAndContactId(Principal principal, String contactEmail) {
+    public Contact getContactWithConnectedUserAndContactEmail(Principal principal, String contactEmail) {
         log.info("getting contact at the mail : " + contactEmail + " for user " + principal.getName());
         User connectedUser = userService.findByEmail(principal.getName());
         User contactUser = userService.findByEmail(contactEmail);
