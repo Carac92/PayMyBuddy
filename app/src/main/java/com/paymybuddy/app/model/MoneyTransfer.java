@@ -10,7 +10,7 @@ import java.util.Date;
  * Model for money transfers inside the application between two different users.
  */
 @Entity
-@Table(name = "Money_Transfers")
+@Table(name = "Money_Transfer")
 public class MoneyTransfer {
 
     @Id

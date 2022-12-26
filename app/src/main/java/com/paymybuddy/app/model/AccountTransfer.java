@@ -10,7 +10,7 @@ import java.util.Date;
  * Model for Transfer between the account of the user and one of his bank accounts.
  */
 @Entity
-@Table(name = "Account_Transfers")
+@Table(name = "Account_Transfer")
 public class AccountTransfer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

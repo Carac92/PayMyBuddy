@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Model for contact linked between two users.
  */
 @Entity
-@Table(name="Contacts")
+@Table(name="Contactt")
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
