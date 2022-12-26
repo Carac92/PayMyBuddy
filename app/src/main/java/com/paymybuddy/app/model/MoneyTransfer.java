@@ -1,11 +1,16 @@
 package com.paymybuddy.app.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * Model for money transfers inside the application between two different users.
+ */
 @Entity
-@Table(name = "Money_Transfers")
+@Table(name = "Money_Transfer")
 public class MoneyTransfer {
 
     @Id
@@ -17,6 +22,7 @@ public class MoneyTransfer {
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "transfer_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date transferDate;
 
     @ManyToOne(cascade = CascadeType.ALL)

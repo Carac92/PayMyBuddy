@@ -3,7 +3,9 @@ package com.paymybuddy.app.model;
 
 
 import javax.persistence.*;
-
+/**
+ * Model for the bank account informations.
+ */
 @Entity
 @Table(name = "Bank_Info")
 public class BankInfo {

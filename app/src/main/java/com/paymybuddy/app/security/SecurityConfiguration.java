@@ -12,6 +12,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Security Configuration contain a bean of BcryptPasswordEncoder, a bean of SecurityFilterChain and
+ * Autowired to userDetailsServiceImpl.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {

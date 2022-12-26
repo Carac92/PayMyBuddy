@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for the bill extends JpaRepository.
+ */
 @Repository
 public interface BillRepository extends JpaRepository<Bill,Long> {
     List<Bill> getBillsByUserId(Long UserID);

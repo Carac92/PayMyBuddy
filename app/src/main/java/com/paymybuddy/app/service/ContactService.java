@@ -5,8 +5,11 @@ import com.paymybuddy.app.model.Contact;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * Interface for Contact service
+ */
 public interface ContactService {
-    Contact getContactWithConnectedUserAndContactId(Principal principal, String contactEmail);
+    Contact getContactWithConnectedUserAndContactEmail(Principal principal, String contactEmail);
 
     void addContact(Principal principal, String contactEmail);
 

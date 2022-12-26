@@ -3,8 +3,11 @@ package com.paymybuddy.app.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+/**
+ * Model for the bills of linked to a user and a money transfer.
+ */
 @Entity
-@Table(name = "Bills")
+@Table(name = "BillB")
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -23,12 +23,9 @@ public class HomePageController {
 
     @GetMapping("/home")
     public String home(Principal principal, Model model) {
-        List<MoneyTransfer> moneyTransfers = moneyTransferService.getMoneyTransfers(principal);
         User connectedUser = userService.findByEmail(principal.getName());
         model.addAttribute("firstName", connectedUser.getFirstName());
         model.addAttribute("balance", connectedUser.getCredit());
-        model.addAttribute("moneyTransfers", moneyTransfers );
-
         return "home";
     }
 }

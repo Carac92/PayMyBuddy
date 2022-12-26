@@ -9,10 +9,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Entity of User implements CustomUserDetails for Spring Security
+ * Entity of User.
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "Usera")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +39,6 @@ public class User {
     private List <BankInfo> bankInfos;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
-              orphanRemoval = true)
-    private List<CreditCardInfo> creditCardInfos;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<MoneyTransfer> moneyTransfers;
 
@@ -53,6 +49,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
                 orphanRemoval = true)
     private List<Bill> bills;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AccountTransfer> accountTransfers;
+
 
 
     // GETTERS AND SETTERS
@@ -127,14 +126,6 @@ public class User {
         this.bankInfos = bankInfos;
     }
 
-    public List<CreditCardInfo> getCreditCardInfos() {
-        return creditCardInfos;
-    }
-
-    public void setCreditCardInfos(List<CreditCardInfo> creditCardInfos) {
-        this.creditCardInfos = creditCardInfos;
-    }
-
     public List<MoneyTransfer> getMoneyTransfers() {
         return moneyTransfers;
     }
@@ -157,5 +148,13 @@ public class User {
 
     public void setBills(List<Bill> bills) {
         this.bills = bills;
+    }
+
+    public List<AccountTransfer> getAccountTransfers() {
+        return accountTransfers;
+    }
+
+    public void setAccountTransfers(List<AccountTransfer> accountTransfers) {
+        this.accountTransfers = accountTransfers;
     }
 }

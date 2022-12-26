@@ -14,6 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
@@ -48,10 +50,12 @@ public class BankInfoServiceTest {
         bankInfo.setId(1L);
         bankInfo.setBic("1234");
         bankInfo.setNameOfAccount("test");
+        List<BankInfo> bankInfoList = new ArrayList<>();
+        bankInfoList.add(bankInfo);
 
         when(principal.getName()).thenReturn("test");
         when(userService.findByEmail(principal.getName())).thenReturn(user);
-        when(bankInfoRepository.getBankInfoByUserId(user.getId())).thenReturn(bankInfo);
+        when(bankInfoRepository.getBankInfoByUserId(user.getId())).thenReturn(bankInfoList);
 
     }
 
@@ -68,8 +72,8 @@ public class BankInfoServiceTest {
     }
     @Test
     void testGetBankInfoForUser() throws Exception {
-        BankInfo result = bankInfoService.getBankInfoForUser(principal);
-        assertThat(result.getUser().getLastName()).isEqualTo("test");
-        assertThat(result.getNameOfAccount()).isEqualTo("test");
+        List<BankInfo> result = bankInfoService.getBankInfosForUser(principal);
+        assertThat(result.get(0).getUser().getLastName()).isEqualTo("test");
+        assertThat(result.get(0).getNameOfAccount()).isEqualTo("test");
     }
 }

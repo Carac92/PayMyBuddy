@@ -31,7 +31,7 @@ public class ContactServiceTest {
     private Principal principal;
     @Mock
     private UserService userService;
-//TODO : do test
+
     @BeforeEach
     public void setUp() throws Exception {
         User user = new User();
@@ -80,7 +80,7 @@ public class ContactServiceTest {
     }
     @Test
     void testGetContactByUserIdAndContactId() throws Exception {
-        Contact result = contactService.getContactWithConnectedUserAndContactId(principal, "test2");
+        Contact result = contactService.getContactWithConnectedUserAndContactEmail(principal, "test2");
         assertThat(result.getUser().getLastName()).isEqualTo("test");
         assertThat(result.getContactUser().getLastName()).isEqualTo("test2");
         assertThat(result.getId()).isEqualTo(1L);
