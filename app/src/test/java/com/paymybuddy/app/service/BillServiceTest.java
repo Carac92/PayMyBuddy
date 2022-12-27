@@ -5,6 +5,7 @@ import com.paymybuddy.app.model.MoneyTransfer;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.BillRepository;
 import com.paymybuddy.app.service.implementation.BillServiceImpl;
+import com.paymybuddy.app.service.implementation.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

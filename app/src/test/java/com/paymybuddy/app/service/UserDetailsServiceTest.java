@@ -2,13 +2,12 @@ package com.paymybuddy.app.service;
 
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.UserRepository;
-import com.paymybuddy.app.service.implementation.UserDetailsServiceImpl;
+import com.paymybuddy.app.service.implementation.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class UserDetailsServiceTest {
 
     @InjectMocks
-    private UserDetailsServiceImpl userDetailsService;
+    private UserService userService;
 
     @Mock
     private UserRepository userRepository;
@@ -42,7 +41,7 @@ public class UserDetailsServiceTest {
         user.setLastName("test");
 
         when(userRepository.findByEmail(anyString())).thenReturn(user);
-        UserDetails result = userDetailsService.loadUserByUsername("test");
+        UserDetails result = userService.loadUserByUsername("test");
         assertNotNull(result);
     }
 }

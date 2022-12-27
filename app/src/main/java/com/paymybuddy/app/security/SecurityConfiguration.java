@@ -1,14 +1,18 @@
 package com.paymybuddy.app.security;
 
-import com.paymybuddy.app.service.implementation.UserDetailsServiceImpl;
+
+import com.paymybuddy.app.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,18 +23,26 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
     @Autowired
-    private UserDetailsServiceImpl userService;
+    private UserService userService;
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider daoAuthenticationProvider(){
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setPasswordEncoder(encoder());
+        authProvider.setUserDetailsService(userService);
+        return authProvider;
     }
 
 
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/profile/register", "/profile/saveUser").permitAll()
                 .anyRequest()
@@ -38,7 +50,9 @@ public class SecurityConfiguration {
                 .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
-                    .defaultSuccessUrl("/home")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/home",true)
                 .and()
                 .rememberMe()
                     .rememberMeParameter("remember-Me")

@@ -2,7 +2,7 @@ package com.paymybuddy.app.service;
 
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.UserRepository;
-import com.paymybuddy.app.service.implementation.UserServiceImpl;
+import com.paymybuddy.app.service.implementation.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 public class UserServiceTest {
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
     @Mock
     private UserRepository userRepository;
     @Mock
