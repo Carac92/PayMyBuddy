@@ -8,11 +8,11 @@
 </head>
 <body>
 <div class="container">
-  <form class="form-signin" method="post" action="/login">
+  <form class="form-signin" method="post" th:action="@{login}">
     <h2 class="btn btn-success btn-large">Pay My Buddy</h2>
     <p>
-      <label for="username" class="sr-only">Username</label>
-      <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
+      <label for="email" class="sr-only">Username</label>
+      <input type="text" id="email" name="email" class="form-control" placeholder="Email" required=""
              autofocus="">
     </p>
     <p>

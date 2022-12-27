@@ -1,16 +1,14 @@
 package com.paymybuddy.app.controller;
 
-import com.paymybuddy.app.model.MoneyTransfer;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.service.MoneyTransferService;
-import com.paymybuddy.app.service.UserService;
+import com.paymybuddy.app.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class HomePageController {
