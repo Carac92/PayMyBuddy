@@ -4,6 +4,7 @@ import com.paymybuddy.app.model.Contact;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.ContactRepository;
 import com.paymybuddy.app.service.ContactService;
+import com.paymybuddy.app.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

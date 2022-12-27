@@ -5,7 +5,7 @@ import com.paymybuddy.app.model.Bill;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.service.BankInfoService;
 import com.paymybuddy.app.service.BillService;
-import com.paymybuddy.app.service.implementation.UserService;
+import com.paymybuddy.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -4,7 +4,6 @@ import com.paymybuddy.app.model.Contact;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.ContactRepository;
 import com.paymybuddy.app.service.implementation.ContactServiceImpl;
-import com.paymybuddy.app.service.implementation.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

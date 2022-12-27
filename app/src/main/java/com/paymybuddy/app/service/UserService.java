@@ -1,4 +1,4 @@
-package com.paymybuddy.app.service.implementation;
+package com.paymybuddy.app.service;
 
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.UserRepository;
