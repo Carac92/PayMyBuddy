@@ -2,7 +2,6 @@ package com.paymybuddy.app.service;
 
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.UserRepository;
-import com.paymybuddy.app.service.implementation.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
