@@ -37,22 +37,21 @@ public class User implements UserDetails {
     @Column(name = "credit", nullable = false)
     private BigDecimal credit;
     // DB links
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH,
                 orphanRemoval = true)
     private List <BankInfo> bankInfos;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user",
             orphanRemoval = true)
     private List<MoneyTransfer> moneyTransfers;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
-                orphanRemoval = true)
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Contact> contacts;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user",
                 orphanRemoval = true)
     private List<Bill> bills;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<AccountTransfer> accountTransfers;
 
 

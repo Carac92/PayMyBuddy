@@ -69,6 +69,7 @@ public class UserService implements UserDetailsService {
 
     public void deleteConnectedUser(Long id) {
         log.info("deleting account for id :" + id);
+
         userRepository.deleteById(id);
     }
 

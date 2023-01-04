@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface MoneyTransferRepository extends JpaRepository <MoneyTransfer,Long> {
     List<MoneyTransfer> getMoneyTransferByUserId(Long userID);
+
 }

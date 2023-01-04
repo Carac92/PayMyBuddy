@@ -33,10 +33,10 @@ VALUES ('marie.dupont@mail.com', '$2y$10$dQoHaaFjLCrVb7PuXLKvMOnLJw.CfKFkac4bKOe
 
 CREATE TABLE Contact(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-user_id INTEGER NOT NULL,
-contact_user_id INTEGER NOT NULL,
-FOREIGN KEY (user_id) REFERENCES User(id),
-FOREIGN KEY(contact_user_id) REFERENCES User(id)
+user_id INTEGER,
+contact_user_id INTEGER,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+FOREIGN KEY(contact_user_id) REFERENCES User(id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE Money_Transfer(

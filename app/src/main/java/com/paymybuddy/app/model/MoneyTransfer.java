@@ -25,13 +25,13 @@ public class MoneyTransfer {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date transferDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "contact_id")
     private User contact;
-    @OneToOne(mappedBy = "moneyTransfer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "moneyTransfer", orphanRemoval = true)
     private Bill bill;
 
 

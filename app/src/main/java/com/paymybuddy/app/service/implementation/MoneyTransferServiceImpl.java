@@ -36,21 +36,23 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
         log.info("adding money transfer between " + principal.getName() + " and " + contactEmail);
         User connectedUser = userService.findByEmail(principal.getName());
         User contactUser = userService.findByEmail(contactEmail);
-        if(connectedUser.getCredit().doubleValue()>=amount.doubleValue()){
-            log.info("Money transfer added");
-            MoneyTransfer moneyTransfer = new MoneyTransfer();
-            moneyTransfer.setTransferDate(Date.valueOf(LocalDate.now()));
-            moneyTransfer.setAmount(amount.multiply(BigDecimal.valueOf(0.95)));
-            moneyTransfer.setDescription(description);
-            moneyTransfer.setUser(connectedUser);
-            moneyTransfer.setContact(contactUser);
-            billService.addBill(principal, moneyTransfer , amount);
-            moneyTransferRepository.save(moneyTransfer);
+        if(contactUser != null) {
+            if (connectedUser.getCredit().doubleValue() >= amount.doubleValue()) {
+                log.info("Money transfer added");
+                MoneyTransfer moneyTransfer = new MoneyTransfer();
+                moneyTransfer.setTransferDate(Date.valueOf(LocalDate.now()));
+                moneyTransfer.setAmount(amount.multiply(BigDecimal.valueOf(0.95)));
+                moneyTransfer.setDescription(description);
+                moneyTransfer.setUser(connectedUser);
+                moneyTransfer.setContact(contactUser);
+                billService.addBill(principal, moneyTransfer, amount);
+                moneyTransferRepository.save(moneyTransfer);
 
-            contactUser.setCredit(contactUser.getCredit().add(moneyTransfer.getAmount()));
-            userService.updateCreditForUser(contactUser);
-            connectedUser.setCredit(connectedUser.getCredit().subtract(amount));
-            userService.updateCreditForUser(connectedUser);
+                contactUser.setCredit(contactUser.getCredit().add(moneyTransfer.getAmount()));
+                userService.updateCreditForUser(contactUser);
+                connectedUser.setCredit(connectedUser.getCredit().subtract(amount));
+                userService.updateCreditForUser(connectedUser);
+            }
         }
         log.error("Not enough credit to transfer the amount");
     }
