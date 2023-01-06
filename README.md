@@ -19,8 +19,10 @@ It works at the URL : localhost:8080/
 
 ---------------------------- DATA STRUCTURE -----------------------------------------------
 
-Caracatzanis_Quentin_2_mpd_112022.png<img width="704" alt="image" src="https://user-images.githubusercontent.com/96061779/211026114-1807d2e5-dd14-49ce-807f-6d13750c8c94.png">
+Carac_2_mpd_112022.png<img width="704" alt="image" src="https://user-images.githubusercontent.com/96061779/211027210-776a9d39-e927-451f-8bbd-64bd1ffc09e3.png">
+
 
 ---------------------------- UML DIAGRAM --------------------------------------------------
+Carac_2_uml_112022.png<img width="593" alt="image" src="https://user-images.githubusercontent.com/96061779/211027197-9e21d83a-e5d2-4213-91d2-53148bf0c261.png">
 
-Caracatzanis_Quentin_2_uml_112022.png<img width="593" alt="image" src="https://user-images.githubusercontent.com/96061779/211026295-92550433-412c-4a6b-860a-d0df986e41d0.png">
+
