@@ -9,7 +9,8 @@ import java.util.List;
  * Interface for Contact service
  */
 public interface ContactService {
-    Contact getContactWithConnectedUserAndContactEmail(Principal principal, String contactEmail);
+
+    Contact getContactById(Long id);
 
     void addContact(Principal principal, String contactEmail);
 

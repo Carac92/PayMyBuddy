@@ -53,7 +53,9 @@ public class ContactServiceTest {
 
         Contact contact = new Contact();
         contact.setId(1L);
-        contact.setContactUser(user2);
+        contact.setFirstName(user2.getFirstName());
+        contact.setLastName(user2.getLastName());
+        contact.setEmail(user2.getEmail());
         contact.setUser(user);
         List<Contact> contactList = new ArrayList<Contact>();
         contactList.add(contact);
@@ -61,7 +63,7 @@ public class ContactServiceTest {
         when(principal.getName()).thenReturn("test");
         when(userService.findByEmail(principal.getName())).thenReturn(user);
         when(userService.findByEmail("test2")).thenReturn(user2);
-        when(contactRepository.findContactByUserIdAndContactUserId(user.getId(), user2.getId())).thenReturn(contact);
+        when(contactRepository.getContactById(contact.getId())).thenReturn(contact);
         when(contactRepository.findAllByUserId(user.getId())).thenReturn(contactList);
     }
 
@@ -78,12 +80,14 @@ public class ContactServiceTest {
         assertThat(result.get(0).getId()).isEqualTo(1L);
         assertThat(result.get(0).getUser().getLastName()).isEqualTo("test");
     }
+
     @Test
-    void testGetContactByUserIdAndContactId() throws Exception {
-        Contact result = contactService.getContactWithConnectedUserAndContactEmail(principal, "test2");
-        assertThat(result.getUser().getLastName()).isEqualTo("test");
-        assertThat(result.getContactUser().getLastName()).isEqualTo("test2");
+    void testGetContactById() throws Exception {
+        Contact result = contactService.getContactById(1L);
         assertThat(result.getId()).isEqualTo(1L);
+        assertThat(result.getLastName()).isEqualTo("test2");
+        assertThat(result.getEmail()).isEqualTo("test2");
+        assertThat(result.getFirstName()).isEqualTo("test2");
     }
     @Test
     void testRemoveContactForUser() throws Exception {

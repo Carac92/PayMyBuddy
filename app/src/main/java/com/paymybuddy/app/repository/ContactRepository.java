@@ -4,6 +4,7 @@ import com.paymybuddy.app.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.plaf.synth.ColorType;
 import java.util.List;
 
 /**
@@ -13,8 +14,7 @@ import java.util.List;
 public interface ContactRepository extends JpaRepository<Contact,Long> {
 
 
-    Contact findContactByUserIdAndContactUserId(Long userId, Long contactUserId);
-
+    Contact getContactById(Long id);
     List<Contact> findAllByUserId(Long userId);
     void deleteById(Long id);
 

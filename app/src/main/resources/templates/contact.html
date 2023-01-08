@@ -45,8 +45,8 @@
         <td>Delete</td>
       </tr>
       <tr th:each="contact:${contacts}">
-        <td th:text="${contact.getContactUser().getFirstName()}"></td>
-        <td th:text="${contact.getContactUser().getLastName()}"></td>
+        <td th:text="${contact.getFirstName()}"></td>
+        <td th:text="${contact.getLastName()}"></td>
         <td >
           <form th:action="@{contact/deleteContact}" th:method="delete">
             <input type="hidden" name="contactId" th:value="${contact.getId()}" />

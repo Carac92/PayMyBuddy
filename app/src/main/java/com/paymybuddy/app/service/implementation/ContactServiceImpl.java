@@ -27,12 +27,10 @@ public class ContactServiceImpl implements ContactService {
     private UserService userService;
 
 
+
     @Override
-    public Contact getContactWithConnectedUserAndContactEmail(Principal principal, String contactEmail) {
-        log.info("getting contact at the mail : " + contactEmail + " for user " + principal.getName());
-        User connectedUser = userService.findByEmail(principal.getName());
-        User contactUser = userService.findByEmail(contactEmail);
-        return contactRepository.findContactByUserIdAndContactUserId(connectedUser.getId(), contactUser.getId());
+    public Contact getContactById(Long id) {
+        return contactRepository.getContactById(id);
     }
 
 
@@ -44,7 +42,9 @@ public class ContactServiceImpl implements ContactService {
         if(contactUser!=null) {
             log.info("creating contact between " + principal.getName() + " and " + contactEmail);
             contact.setUser(userService.findByEmail(principal.getName()));
-            contact.setContactUser(contactUser);
+            contact.setEmail(contactEmail);
+            contact.setFirstName(contactUser.getFirstName());
+            contact.setLastName(contactUser.getLastName());
             contactRepository.save(contact);
         }
         log.error("User doesn't exist with the email" + contactEmail);

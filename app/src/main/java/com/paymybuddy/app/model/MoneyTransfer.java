@@ -23,9 +23,9 @@ public class MoneyTransfer {
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn(name = "contact_id")
-    private User contact;
+    private Contact contact;
     @OneToOne(mappedBy = "moneyTransfer", orphanRemoval = true)
     private Bill bill;
 
@@ -64,10 +64,10 @@ public class MoneyTransfer {
         this.user = user;
     }
 
-    public void setContact(User contact) {
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
-    public User getContact() {
+    public Contact getContact() {
         return contact;
     }
 
@@ -87,7 +87,7 @@ public class MoneyTransfer {
         this.bill = bill;
     }
 
-    public MoneyTransfer(BigDecimal amount, Date transferDate, User user, User contact) {
+    public MoneyTransfer(BigDecimal amount, Date transferDate, User user, Contact contact) {
         this.amount = amount;
         this.transferDate = transferDate;
         this.user = user;

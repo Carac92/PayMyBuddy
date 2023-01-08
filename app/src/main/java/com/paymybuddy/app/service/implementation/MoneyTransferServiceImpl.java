@@ -1,14 +1,15 @@
 package com.paymybuddy.app.service.implementation;
 
+import com.paymybuddy.app.model.Contact;
 import com.paymybuddy.app.model.MoneyTransfer;
 import com.paymybuddy.app.model.User;
 import com.paymybuddy.app.repository.MoneyTransferRepository;
 import com.paymybuddy.app.service.BillService;
+import com.paymybuddy.app.service.ContactService;
 import com.paymybuddy.app.service.MoneyTransferService;
 import com.paymybuddy.app.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,16 +31,19 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
     @Autowired
     private UserService userService;
     @Autowired
+    private ContactService contactService;
+    @Autowired
     private MoneyTransferRepository moneyTransferRepository;
     @Autowired
     private BillService billService;
 
     @Transactional()
     @Override
-    public void addMoneyTransfer(Principal principal, String contactEmail, BigDecimal amount, String description){
-        log.info("adding money transfer between " + principal.getName() + " and " + contactEmail);
+    public void addMoneyTransfer(Principal principal, Long contactId, BigDecimal amount, String description){
+        log.info("adding money transfer between " + principal.getName() + " and " + contactId);
         User connectedUser = userService.findByEmail(principal.getName());
-        User contactUser = userService.findByEmail(contactEmail);
+        Contact contact = contactService.getContactById(contactId);
+        User contactUser = userService.findByEmail(contact.getEmail());
         if(contactUser != null) {
             if (connectedUser.getCredit().doubleValue() >= amount.doubleValue()) {
                 log.info("Money transfer added");
@@ -48,7 +52,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
                 moneyTransfer.setAmount(amount.multiply(BigDecimal.valueOf(0.95)));
                 moneyTransfer.setDescription(description);
                 moneyTransfer.setUser(connectedUser);
-                moneyTransfer.setContact(contactUser);
+                moneyTransfer.setContact(contact);
                 billService.addBill(principal, moneyTransfer, amount);
                 moneyTransferRepository.save(moneyTransfer);
 

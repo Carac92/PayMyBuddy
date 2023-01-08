@@ -33,8 +33,8 @@ public class TransferController {
     @PostMapping("/addTransfer")
     public String addTransfer(Principal principal, @RequestParam(value="amount")BigDecimal amount,
                               @RequestParam(value="description") String description,
-                              @RequestParam(value="contactEmail") String contactEmail) throws ChangeSetPersister.NotFoundException, ClassNotFoundException {
-        moneyTransferService.addMoneyTransfer(principal, contactEmail, amount, description);
+                              @RequestParam(value="contactId") Long contactId) throws ChangeSetPersister.NotFoundException, ClassNotFoundException {
+        moneyTransferService.addMoneyTransfer(principal, contactId, amount, description);
         return "redirect:/transfer";
     }
 }

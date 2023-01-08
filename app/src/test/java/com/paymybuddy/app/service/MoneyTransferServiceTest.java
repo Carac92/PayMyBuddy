@@ -59,26 +59,28 @@ public class MoneyTransferServiceTest {
         user2.setCredit(BigDecimal.valueOf(100.00));
 
         Contact contact = new Contact();
-        contact.setContactUser(user2);
+        contact.setEmail(user2.getEmail());
+        contact.setFirstName(user2.getFirstName());
+        contact.setLastName(user2.getLastName());
         contact.setUser(user);
         contact.setId(1L);
 
         List <MoneyTransfer> moneyTransfers = new ArrayList<MoneyTransfer>();
-        MoneyTransfer moneyTransfer = new MoneyTransfer (BigDecimal.valueOf(30.00), Date.valueOf(LocalDate.now()),user, user2);
+        MoneyTransfer moneyTransfer = new MoneyTransfer (BigDecimal.valueOf(30.00), Date.valueOf(LocalDate.now()),user, contact);
         moneyTransfers.add(moneyTransfer);
 
 
         when(moneyTransferRepository.getMoneyTransferByUserId(anyLong())).thenReturn(moneyTransfers);
         when(userService.findByEmail("test")).thenReturn(user);
+        when(contactService.getContactById(1L)).thenReturn(contact);
         when(userService.findByEmail("test2")).thenReturn(user2);
         when(principal.getName()).thenReturn("test");
     }
 
-    //TODO: test
     @Test
     public void testMoneyTransfer() throws Exception {
 
-        moneyTransferService.addMoneyTransfer(principal, "test2", BigDecimal.valueOf(30.00), "description");
+        moneyTransferService.addMoneyTransfer(principal, 1L, BigDecimal.valueOf(30.00), "description");
         verify(moneyTransferRepository, times(1)).save(any());
     }
 
