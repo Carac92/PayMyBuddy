@@ -19,11 +19,11 @@ It works at the URL : localhost:8080/
 
 ---------------------------- DATA STRUCTURE -----------------------------------------------
 
-<img width="704" alt="image" src="https://user-images.githubusercontent.com/96061779/211027210-776a9d39-e927-451f-8bbd-64bd1ffc09e3.png">
+<img width="776" alt="image" src="https://user-images.githubusercontent.com/96061779/211201599-f6138625-0f91-45fc-aae1-976187f7902f.png">
 
 
 ---------------------------- UML DIAGRAM --------------------------------------------------
 
-<img width="593" alt="image" src="https://user-images.githubusercontent.com/96061779/211027197-9e21d83a-e5d2-4213-91d2-53148bf0c261.png">
+<img width="595" alt="image" src="https://user-images.githubusercontent.com/96061779/211201616-4d9a0006-08b1-4e57-92bb-8d22b9dfef22.png">
 
 
