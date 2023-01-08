@@ -10,25 +10,20 @@ import java.util.Date;
  * Model for money transfers inside the application between two different users.
  */
 @Entity
-@Table(name = "Money_Transfer")
 public class MoneyTransfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
-    @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "transfer_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date transferDate;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne()
     @JoinColumn(name = "contact_id")
     private User contact;
     @OneToOne(mappedBy = "moneyTransfer", orphanRemoval = true)

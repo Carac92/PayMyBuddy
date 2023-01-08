@@ -10,11 +10,9 @@ import java.util.Date;
  * Model for Transfer between the account of the user and one of his bank accounts.
  */
 @Entity
-@Table(name = "Account_Transfer")
 public class AccountTransfer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
@@ -23,9 +21,8 @@ public class AccountTransfer {
     @JoinColumn(name = "bank_info_id")
     private BankInfo bankInfo;
 
-    @Column(name = "amount")
     private BigDecimal amount;
-    @Column(name = "transfer_date")
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date transferDate;
 

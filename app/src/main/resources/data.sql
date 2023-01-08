@@ -2,7 +2,7 @@ DROP DATABASE PayMyBuddy;
 CREATE DATABASE PayMyBuddy;
 USE PayMyBuddy;
 
-CREATE TABLE User (
+CREATE TABLE user (
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 email VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
@@ -13,7 +13,7 @@ birthdate DATE NOT NULL,
 credit DECIMAL(10,2) NOT NULL
 );
 
-CREATE TABLE Bank_Info(
+CREATE TABLE bank_info(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 user_id INTEGER NOT NULL,
 iban VARCHAR(255) NOT NULL,
@@ -22,24 +22,24 @@ name_of_account VARCHAR(255) NOT NULL,
 FOREIGN KEY (user_id) REFERENCES User(id)
 );
 -- mdp123
-INSERT INTO User (email, password, first_name, last_name, address, birthdate, credit)
+INSERT INTO user (email, password, first_name, last_name, address, birthdate, credit)
 VALUES ('jean.dupont@mail.com', '$2y$10$dQoHaaFjLCrVb7PuXLKvMOnLJw.CfKFkac4bKOe19IajddHfo0YCi', 'Jean', 'Dupont',
  '1234 avenue', DATE '1989-07-03', 1000);
 -- mdp123
-INSERT INTO User (email, password, first_name, last_name, address, birthdate, credit)
+INSERT INTO user (email, password, first_name, last_name, address, birthdate, credit)
 VALUES ('marie.dupont@mail.com', '$2y$10$dQoHaaFjLCrVb7PuXLKvMOnLJw.CfKFkac4bKOe19IajddHfo0YCi', 'Marie', 'Dupont',
  '1234 avenue', DATE '1988-05-02', 1000);
 
 
-CREATE TABLE Contact(
+CREATE TABLE contact(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 user_id INTEGER,
 contact_user_id INTEGER,
-FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-FOREIGN KEY(contact_user_id) REFERENCES User(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+FOREIGN KEY (user_id) REFERENCES User(id),
+FOREIGN KEY(contact_user_id) REFERENCES User(id)
 );
 
-CREATE TABLE Money_Transfer(
+CREATE TABLE money_transfer(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 contact_id INTEGER NOT NULL,
 user_id INTEGER NOT NULL,
@@ -50,7 +50,7 @@ FOREIGN KEY (user_id) REFERENCES User(id),
 FOREIGN KEY (contact_id) REFERENCES User(id)
 );
 
-CREATE TABLE Bill(
+CREATE TABLE bill(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 user_id INTEGER NOT NULL,
 money_transfer_id INTEGER NOT NULL,
@@ -59,7 +59,7 @@ FOREIGN KEY (user_id) REFERENCES User(id),
 FOREIGN KEY (money_transfer_id) REFERENCES Money_Transfer(id)
 );
 
-CREATE TABLE Account_Transfer(
+CREATE TABLE account_transfer(
 id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 user_id INTEGER NOT NULL,
 bank_info_id INTEGER NOT NULL,

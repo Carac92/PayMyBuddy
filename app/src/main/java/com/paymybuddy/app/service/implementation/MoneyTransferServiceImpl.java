@@ -8,7 +8,10 @@ import com.paymybuddy.app.service.MoneyTransferService;
 import com.paymybuddy.app.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -31,6 +34,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
     @Autowired
     private BillService billService;
 
+    @Transactional()
     @Override
     public void addMoneyTransfer(Principal principal, String contactEmail, BigDecimal amount, String description){
         log.info("adding money transfer between " + principal.getName() + " and " + contactEmail);
@@ -57,6 +61,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
         log.error("Not enough credit to transfer the amount");
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<MoneyTransfer> getMoneyTransfers(Principal principal) {
         log.info("Getting all money transfers for " + principal.getName());

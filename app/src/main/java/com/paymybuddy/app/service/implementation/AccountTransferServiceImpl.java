@@ -9,6 +9,7 @@ import com.paymybuddy.app.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -30,6 +31,7 @@ public class AccountTransferServiceImpl implements AccountTransferService {
     @Autowired
     private AccountTransferRepository accountTransferRepository;
 
+    @Transactional
     @Override
     public void addAccountTransfer(Principal principal, BigDecimal amount, Long bankInfoId, Boolean deposit) {
         User connectedUser = userService.findByEmail(principal.getName());
@@ -57,6 +59,7 @@ public class AccountTransferServiceImpl implements AccountTransferService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<AccountTransfer> getAccountTransfers(Principal principal) {
         log.info("Getting all transfer from/to bank account for " + principal.getName());

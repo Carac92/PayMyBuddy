@@ -7,16 +7,15 @@ import java.math.BigDecimal;
  * Model for the bills of linked to a user and a money transfer.
  */
 @Entity
-@Table(name = "Bill")
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+
     private Long id;
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id" )
     private User user;
-    @Column(name = "price", nullable = false)
+
     private BigDecimal price;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "money_transfer_id")

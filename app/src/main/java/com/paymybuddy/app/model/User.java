@@ -15,26 +15,17 @@ import java.util.List;
  * Entity of User.
  */
 @Entity
-@Table(name = "User")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "address", nullable = false)
     private String address;
-    @Column(name = "birthdate", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
-    @Column(name = "credit", nullable = false)
     private BigDecimal credit;
     // DB links
     @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH,

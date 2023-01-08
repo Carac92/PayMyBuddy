@@ -6,17 +6,15 @@ import javax.persistence.*;
  * Model for contact linked between two users.
  */
 @Entity
-@Table(name="Contact")
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne()
     @JoinColumn(name = "contact_user_id")
     private User contactUser;
 
